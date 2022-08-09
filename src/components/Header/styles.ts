@@ -27,3 +27,7 @@ export const HeaderContainer = styled.header`
     }
   `}
 `
+
+export const ImageLogo = styled.img`
+  cursor: pointer;
+`
