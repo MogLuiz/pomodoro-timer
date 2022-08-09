@@ -4,8 +4,8 @@ import { Header } from '../../components/Header'
 import * as S from './styles'
 
 export const DefaultLayout = () => (
-  <S.Wrapper>
+  <S.LayoutContainer>
     <Header />
     <Outlet />
-  </S.Wrapper>
+  </S.LayoutContainer>
 )
