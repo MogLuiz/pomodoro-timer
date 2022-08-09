@@ -1,9 +1,13 @@
-import React from 'react'
+import * as S from './styles'
 
 export const Header = () => {
   return (
-    <>
-      <h1>Header</h1>
-    </>
+    <S.HeaderContainer>
+      <span>Logo</span>
+      <nav>
+        <a href="#">timer</a>
+        <a href="#">history</a>
+      </nav>
+    </S.HeaderContainer>
   )
 }
