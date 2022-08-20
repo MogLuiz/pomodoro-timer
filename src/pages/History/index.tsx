@@ -1,11 +1,11 @@
-import { HistoryContainer, HistoryList } from './styles'
+import * as S from './styles'
 
-export function History() {
+export const HistoryPage = () => {
   return (
-    <HistoryContainer>
+    <S.HistoryContainer>
       <h1>Meu histórico</h1>
 
-      <HistoryList>
+      <S.HistoryList>
         <table>
           <thead>
             <tr>
@@ -60,7 +60,7 @@ export function History() {
             </tr>
           </tbody>
         </table>
-      </HistoryList>
-    </HistoryContainer>
+      </S.HistoryList>
+    </S.HistoryContainer>
   )
 }
