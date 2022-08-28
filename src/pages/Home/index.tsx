@@ -2,16 +2,20 @@ import { Play } from 'phosphor-react'
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { newCycleFormValidationSchema } from './utils'
+import { newCycleFormValidationSchema, TNewCycleFormData } from './utils'
 
 import * as S from './styles'
 
 export const Home = () => {
-  const { register, handleSubmit, watch } = useForm({
+  const { register, handleSubmit, watch } = useForm<TNewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
+    defaultValues: {
+      task: '',
+      minutesAmount: 0,
+    },
   })
 
-  const handleCreateNewCicle = (data: any) => {}
+  const handleCreateNewCicle = (data: TNewCycleFormData) => {}
 
   const taskField = watch('task')
   const hasFormDisabled = !taskField
@@ -42,7 +46,7 @@ export const Home = () => {
             placeholder="00"
             step={5}
             min={5}
-            // max={60}
+            max={60}
             {...register('minutesAmount', { valueAsNumber: true })}
           />
 
