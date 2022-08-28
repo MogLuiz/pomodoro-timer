@@ -7,7 +7,7 @@ import { newCycleFormValidationSchema, TNewCycleFormData } from './utils'
 import * as S from './styles'
 
 export const Home = () => {
-  const { register, handleSubmit, watch } = useForm<TNewCycleFormData>({
+  const { register, handleSubmit, watch, reset } = useForm<TNewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
       task: '',
@@ -15,7 +15,9 @@ export const Home = () => {
     },
   })
 
-  const handleCreateNewCicle = (data: TNewCycleFormData) => {}
+  const handleCreateNewCicle = (data: TNewCycleFormData) => {
+    reset()
+  }
 
   const taskField = watch('task')
   const hasFormDisabled = !taskField
