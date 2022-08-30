@@ -7,7 +7,7 @@ import { newCycleFormValidationSchema, TNewCycleFormData } from './utils'
 
 import * as S from './styles'
 
-type TCicle = {
+type TCycle = {
   id: string
   task: string
   minutesAmount: number
@@ -26,8 +26,23 @@ export const Home = () => {
   })
 
   const handleCreateNewCicle = (data: TNewCycleFormData) => {
+    const id = String(new Date().getTime())
+
+    const newCycle: TCycle = {
+      id,
+      task: data.task,
+      minutesAmount: data.minutesAmount,
+    }
+
+    setCycles((state) => [...state, newCycle])
+    setActiveCycleId(id)
+
     reset()
   }
+
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+
+  console.log(activeCycle)
 
   const taskField = watch('task')
   const hasFormDisabled = !taskField
