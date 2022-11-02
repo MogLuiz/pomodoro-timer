@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Play } from 'phosphor-react'
+import { HandPalm, Play } from 'phosphor-react'
 
 import { differenceInSeconds } from 'date-fns'
 import { newCycleFormValidationSchema, TNewCycleFormData } from './utils'
@@ -14,6 +14,7 @@ type TCycle = {
   task: string
   minutesAmount: number
   startDate: Date
+  interruptedDate?: Date
 }
 
 export const Home = () => {
@@ -60,6 +61,19 @@ export const Home = () => {
     setAmountSecondsPassed(0)
 
     reset()
+  }
+
+  function handleInterruptCycle() {
+    setCycles(
+      cycles.map((cycle) => {
+        if (cycle.id === activeCycleId) {
+          return { ...cycle, interruptedDate: new Date() }
+        } else {
+          return cycle
+        }
+      }),
+    )
+    setActiveCycleId(null)
   }
 
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
@@ -121,10 +135,17 @@ export const Home = () => {
           <span>{seconds[1]}</span>
         </S.CountdownContainer>
 
-        <S.StartCountdownButton type="submit" disabled={hasFormDisabled}>
-          <Play size={24} />
-          Começar
-        </S.StartCountdownButton>
+        {activeCycle ? (
+          <S.StopCountdownButton onClick={handleInterruptCycle} type="button">
+            <HandPalm size={24} />
+            Interromper
+          </S.StopCountdownButton>
+        ) : (
+          <S.StartCountdownButton type="submit" disabled={hasFormDisabled}>
+            <Play size={24} />
+            Começar
+          </S.StartCountdownButton>
+        )}
       </form>
     </S.HomeContainer>
   )
